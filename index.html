@@ -3,179 +3,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accenture — Open Roles | SFF '26</title>
+<title>Accenture × SFF — Open Roles</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
   :root {
     --acn-purple: #A100FF;
     --acn-dark: #1a1a1a;
-    --acn-mid: #4a4a4a;
-    --acn-border: #e0e0e0;
+    --acn-mid: #555;
+    --acn-border: #e8e8e8;
+    --acn-bg: #f7f7f7;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', sans-serif; background: #fff; color: var(--acn-dark); font-size: 13px; }
+  body { font-family: 'Inter', sans-serif; background: var(--acn-bg); color: var(--acn-dark); }
 
+  /* ── Header ── */
   .page-header {
     background: var(--acn-dark); color: #fff;
-    padding: 20px 32px 16px;
-    display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+    padding: 20px 16px 16px;
   }
-  .header-left h1 { font-size: 22px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.1; }
-  .header-left h1 span { color: var(--acn-purple); }
-  .header-left p { margin-top: 4px; font-size: 12px; color: #aaa; font-weight: 300; }
-  .header-right { font-size: 11px; color: #888; text-align: right; line-height: 1.6; }
+  .page-header h1 { font-size: 20px; font-weight: 600; line-height: 1.2; }
+  .page-header h1 span { color: var(--acn-purple); }
+  .page-header p { margin-top: 4px; font-size: 11px; color: #aaa; }
 
-  .legend {
-    background: #fafafa; border-bottom: 1px solid var(--acn-border);
-    padding: 10px 32px; display: flex; gap: 24px; font-size: 11px; color: var(--acn-mid);
-  }
-  .legend-item { display: flex; align-items: center; gap: 6px; }
-  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
-
-  .table-wrap { padding: 0 32px 20px; }
-
-  /* Pillar section header */
+  /* ── Pillar header ── */
   .pillar-header {
-    display: flex; align-items: center; gap: 10px;
-    margin-top: 16px; margin-bottom: 2px;
-    padding: 8px 12px;
-    border-radius: 6px 6px 0 0;
-    font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
-    color: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: #fff; margin-top: 16px;
   }
-  .pillar-count {
-    font-size: 10px; font-weight: 400; opacity: 0.8;
-    margin-left: auto;
+  .pillar-count { font-size: 11px; font-weight: 400; opacity: 0.85; }
+
+  /* ── Role cards ── */
+  .cards-wrap { padding: 0 12px; }
+
+  .role-card {
+    background: #fff;
+    border-radius: 10px;
+    margin: 8px 0;
+    padding: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    gap: 14px;
   }
 
-  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  colgroup col { }
-
-  thead th {
-    background: #2a2a2a; color: #ccc;
-    font-weight: 500; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em;
-    padding: 8px 10px; text-align: left; vertical-align: middle;
+  .card-info { flex: 1; min-width: 0; }
+  .card-role { font-size: 14px; font-weight: 600; color: var(--acn-dark); line-height: 1.3; }
+  .card-level {
+    display: inline-block; margin-top: 5px;
+    background: #f0e6ff; color: var(--acn-purple);
+    font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px;
   }
-  tbody tr { border-bottom: 1px solid var(--acn-border); }
-  tbody tr:last-child { border-bottom: 2px solid #ccc; }
-  tbody tr:hover { background: #faf5ff; }
-  tbody td { padding: 6px 10px; vertical-align: middle; font-size: 12px; line-height: 1.4; }
+  .card-email { margin-top: 5px; font-size: 10px; color: #888; word-break: break-all; }
 
-  .role-name { font-weight: 500; color: var(--acn-dark); }
-  .level-badge {
-    display: inline-block; background: #f0e6ff; color: var(--acn-purple);
-    font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 20px; white-space: nowrap;
-  }
-  .recruiter-name { font-weight: 400; color: var(--acn-mid); font-size: 11.5px; }
-  .qr-cell { text-align: center; vertical-align: middle; }
-  .qr-wrapper { display: inline-flex; flex-direction: column; align-items: center; gap: 3px; }
-  .qr-wrapper canvas, .qr-wrapper img { width: 60px !important; height: 60px !important; display: block; }
-  .qr-label { font-size: 9px; color: #999; text-align: center; max-width: 100px; line-height: 1.3; }
-  .email-cell { font-size: 10.5px; color: #666; word-break: break-all; }
+  .card-qr { flex-shrink: 0; text-align: center; }
+  .card-qr canvas, .card-qr img { width: 80px !important; height: 80px !important; display: block; }
+  .card-qr-label { font-size: 9px; color: #999; margin-top: 3px; text-align: center; }
 
+  /* ── Footer ── */
   .page-footer {
-    border-top: 1px solid var(--acn-border); padding: 12px 32px;
-    display: flex; justify-content: space-between; font-size: 10.5px; color: #bbb;
+    margin-top: 24px;
+    border-top: 1px solid var(--acn-border);
+    padding: 12px 16px;
+    font-size: 10px; color: #bbb; text-align: center;
   }
 
-  @media print {
-    body { font-size: 11px; }
-    .page-header, .legend, .table-wrap, .page-footer { padding-left: 16px; padding-right: 16px; }
-    .pillar-header { margin-top: 8px; page-break-after: avoid; break-after: avoid; }
-    table { page-break-inside: auto; }
-    thead { display: table-header-group; }
-    tbody tr { page-break-inside: avoid; break-inside: avoid; }
-    tbody tr:first-child { page-break-before: avoid; break-before: avoid; }
+  @media (min-width: 600px) {
+    .page-header { padding: 24px 32px 20px; }
+    .page-header h1 { font-size: 24px; }
+    .cards-wrap { padding: 0 20px; }
+    .role-card { padding: 16px 20px; }
+    .card-role { font-size: 15px; }
+    .card-qr canvas, .card-qr img { width: 90px !important; height: 90px !important; }
   }
 </style>
 </head>
 <body>
 
 <header class="page-header">
-  <div class="header-left">
-    <h1>Accenture <span>×</span> SFF<br>Open Roles</h1>
-    <p>SFF '26 · 9 Oct 2026</p>
-  </div>
-  <div class="header-right">
-    Scan QR codes to view the full<br>job description &amp; apply online
-  </div>
+  <h1>Accenture <span>×</span> SFF<br>Open Roles</h1>
+  <p>SFF '26 · 9 Oct 2026 · Scan to view JD &amp; apply</p>
 </header>
 
-<div class="legend">
-  <div class="legend-item"><span class="legend-dot" style="background:#A100FF"></span>View JD &amp; Apply (purple)</div>
-  <div class="legend-item"><span class="legend-dot" style="background:#1a1a1a"></span>Recruiter LinkedIn (dark)</div>
-</div>
-
-<div class="table-wrap" id="mainContent"></div>
+<div id="mainContent"></div>
 
 <footer class="page-footer">
-  <span>Accenture Singapore · For event use only</span>
-  <span>Roles sorted by pillar then A–Z · 9 Oct 2026</span>
+  Accenture Singapore · For event use only · 9 Oct 2026
 </footer>
 
 <script>
 const pillars = [
   {
-    name: "Data & AI",
-    color: "#2563EB",
+    name: "Data & AI", color: "#2563EB",
     roles: [
-      { role: "Advanced AI Full Stack Engineer", level: "ML9 – ML6", recruiter: "Laura Barker", email: "laura.a.barker@accenture.com", linkedIn: "https://www.linkedin.com/in/laura-a-barker/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Advanced-AI-Full-Stack-Engineer_R00348851" },
-      { role: "AgentOps Engineer", level: "ML9 – ML8", recruiter: "Chelsea De Guzman", email: "arriane.c.de.guzman@accenture.com", linkedIn: "https://www.linkedin.com/in/chelsea-d-723673177/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/AgentOps-Engineer---AI-Managed-Services_R00344460" },
-      { role: "Agentic AMS Solution Architect", level: "ML7 – ML6", recruiter: "Chelsea De Guzman", email: "arriane.c.de.guzman@accenture.com", linkedIn: "https://www.linkedin.com/in/chelsea-d-723673177/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Agentic-AMS-Solution-Architect_R00344456" },
-      { role: "Agentic Engineer", level: "ML9 – ML8", recruiter: "Chelsea De Guzman", email: "arriane.c.de.guzman@accenture.com", linkedIn: "https://www.linkedin.com/in/chelsea-d-723673177/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Agentic-Engineer_R00344459" },
-      { role: "AI Product Manager", level: "ML6", recruiter: "Chelsea De Guzman", email: "arriane.c.de.guzman@accenture.com", linkedIn: "https://www.linkedin.com/in/chelsea-d-723673177/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/AI-Product-Manager---Managed-Services---AI-Transformation_R00344455" },
-      { role: "AI Quality Engineer", level: "ML9 – ML8", recruiter: "Chelsea De Guzman", email: "arriane.c.de.guzman@accenture.com", linkedIn: "https://www.linkedin.com/in/chelsea-d-723673177/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/AI-Quality-Engineer_R00344458" },
-      { role: "Forward Deployed AI Engineer", level: "ML9 – ML6", recruiter: "Laura Barker", email: "laura.a.barker@accenture.com", linkedIn: "https://www.linkedin.com/in/laura-a-barker/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Forward-Deployed-AI-Engineer_R00348684" },
-      { role: "Full Stack AI Engineer (Associate Director)", level: "ML9 – ML6", recruiter: "Laura Barker", email: "laura.a.barker@accenture.com", linkedIn: "https://www.linkedin.com/in/laura-a-barker/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/LLM-Full-Stack-Engineer-Associate-Director_14210567" },
-      { role: "Full Stack Engineer – Generative AI & Agentic AI", level: "ML7 – ML6", recruiter: "Chelsea De Guzman", email: "arriane.c.de.guzman@accenture.com", linkedIn: "https://www.linkedin.com/in/chelsea-d-723673177/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Full-Stack-Engineer---Generative-AI---Agentic-AI_R00346925" },
+      { role: "Advanced AI Full Stack Engineer", level: "ML9 – ML6", email: "laura.a.barker@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Advanced-AI-Full-Stack-Engineer_R00348851" },
+      { role: "AgentOps Engineer", level: "ML9 – ML8", email: "arriane.c.de.guzman@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/AgentOps-Engineer---AI-Managed-Services_R00344460" },
+      { role: "Agentic AMS Solution Architect", level: "ML7 – ML6", email: "arriane.c.de.guzman@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Agentic-AMS-Solution-Architect_R00344456" },
+      { role: "Agentic Engineer", level: "ML9 – ML8", email: "arriane.c.de.guzman@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Agentic-Engineer_R00344459" },
+      { role: "AI Product Manager", level: "ML6", email: "arriane.c.de.guzman@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/AI-Product-Manager---Managed-Services---AI-Transformation_R00344455" },
+      { role: "AI Quality Engineer", level: "ML9 – ML8", email: "arriane.c.de.guzman@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/AI-Quality-Engineer_R00344458" },
+      { role: "Forward Deployed AI Engineer", level: "ML9 – ML6", email: "laura.a.barker@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Forward-Deployed-AI-Engineer_R00348684" },
+      { role: "Full Stack AI Engineer (Associate Director)", level: "ML9 – ML6", email: "laura.a.barker@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/LLM-Full-Stack-Engineer-Associate-Director_14210567" },
+      { role: "Full Stack Engineer – Generative AI & Agentic AI", level: "ML7 – ML6", email: "arriane.c.de.guzman@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Full-Stack-Engineer---Generative-AI---Agentic-AI_R00346925" },
     ]
   },
   {
-    name: "BA / Analyst",
-    color: "#16A34A",
+    name: "BA / Analyst", color: "#16A34A",
     roles: [
-      { role: "Avaloq Business Analyst / Avaloq Developer", level: "L9 – L8", recruiter: "Aldz Macatulad", email: "aldz.macatulad@accenture.com", linkedIn: "https://www.linkedin.com/in/aldrinmacatulad/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Avaloq-Business-Analyst-Avaloq-Developer_14544778" },
-      { role: "Health Tech Analyst (EPIC)", level: "L10 – L11", recruiter: "Elaine Lee", email: "elaine.yl.lee@accenture.com", linkedIn: "https://www.linkedin.com/in/eleee/", adUrl: "https://www.accenture.com/sg-en/careers/jobdetails?id=R00013977_en&title=Health+Tech+Senior+Analyst+%28EPIC+System%29" },
+      { role: "Avaloq Business Analyst / Avaloq Developer", level: "L9 – L8", email: "aldz.macatulad@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Avaloq-Business-Analyst-Avaloq-Developer_14544778" },
+      { role: "Health Tech Analyst (EPIC)", level: "L10 – L11", email: "elaine.yl.lee@accenture.com", adUrl: "https://www.accenture.com/sg-en/careers/jobdetails?id=R00013977_en&title=Health+Tech+Senior+Analyst+%28EPIC+System%29" },
     ]
   },
   {
-    name: "Tech / Engineering",
-    color: "#7C3AED",
+    name: "Tech / Engineering", color: "#7C3AED",
     roles: [
-      { role: "Cloud Infra DevOps Engineer", level: "ML11 – ML10", recruiter: "Chelsea De Guzman", email: "arriane.c.de.guzman@accenture.com", linkedIn: "https://www.linkedin.com/in/chelsea-d-723673177/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Cloud-Infra-DevOps-Engineer_R00326452" },
-      { role: "ServiceNow Technical Consultant", level: "L10 – L8", recruiter: "Elaine Lee", email: "elaine.yl.lee@accenture.com", linkedIn: "https://www.linkedin.com/in/eleee/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/event/af944b7ef169100034a20915d4d80000/register" },
+      { role: "Cloud Infra DevOps Engineer", level: "ML11 – ML10", email: "arriane.c.de.guzman@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Cloud-Infra-DevOps-Engineer_R00326452" },
+      { role: "ServiceNow Technical Consultant", level: "L10 – L8", email: "elaine.yl.lee@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/event/af944b7ef169100034a20915d4d80000/register" },
     ]
   },
   {
-    name: "PM / Delivery",
-    color: "#D97706",
+    name: "PM / Delivery", color: "#D97706",
     roles: [
-      { role: "Project Manager / Business Analyst — Avaloq", level: "L7 – L6", recruiter: "Aldz Macatulad", email: "aldz.macatulad@accenture.com", linkedIn: "https://www.linkedin.com/in/aldrinmacatulad/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Project-Manager-Business-Analyst--Avaloq-_14544729" },
+      { role: "Project Manager / Business Analyst — Avaloq", level: "L7 – L6", email: "aldz.macatulad@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Project-Manager-Business-Analyst--Avaloq-_14544729" },
     ]
   },
   {
-    name: "SAP / ERP",
-    color: "#DC2626",
+    name: "SAP / ERP", color: "#DC2626",
     roles: [
-      { role: "SAP Program / Project Management Lead", level: "L9 – L6", recruiter: "Mia Tamayo", email: "mia.xylene.tamayo@accenture.com", linkedIn: "https://www.linkedin.com/in/mia-tamayo-8b7101144/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/SAP-Program-Project-Management-Lead_R00330528" },
-      { role: "SAP Project Systems & Plant Maintenance Lead", level: "L8", recruiter: "Mia Tamayo", email: "mia.xylene.tamayo@accenture.com", linkedIn: "https://www.linkedin.com/in/mia-tamayo-8b7101144/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/SAP-P2D--PS-Plant-Maintenance--Lead_14027512" },
+      { role: "SAP Program / Project Management Lead", level: "L9 – L6", email: "mia.xylene.tamayo@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/SAP-Program-Project-Management-Lead_R00330528" },
+      { role: "SAP Project Systems & Plant Maintenance Lead", level: "L8", email: "mia.xylene.tamayo@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/SAP-P2D--PS-Plant-Maintenance--Lead_14027512" },
     ]
   },
   {
-    name: "Cybersecurity",
-    color: "#0F766E",
+    name: "Cybersecurity", color: "#0F766E",
     roles: [
-      { role: "Security Lead", level: "L8", recruiter: "Elaine Lee", email: "elaine.yl.lee@accenture.com", linkedIn: "https://www.linkedin.com/in/eleee/", adUrl: "https://www.accenture.com/sg-en/careers/jobdetails?id=14372176_en&title=Security+Lead" },
-      { role: "Security Managed Services (VAPT) Lead", level: "L8 – L7", recruiter: "Elaine Lee", email: "elaine.yl.lee@accenture.com", linkedIn: "https://www.linkedin.com/in/eleee/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/event/af944b7ef169100034a20915d4d80000/register" },
+      { role: "Security Lead", level: "L8", email: "elaine.yl.lee@accenture.com", adUrl: "https://www.accenture.com/sg-en/careers/jobdetails?id=14372176_en&title=Security+Lead" },
+      { role: "Security Managed Services (VAPT) Lead", level: "L8 – L7", email: "elaine.yl.lee@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/event/af944b7ef169100034a20915d4d80000/register" },
     ]
   },
   {
-    name: "Talent Advancement Program",
-    color: "#475569",
+    name: "Talent Advancement Program", color: "#475569",
     roles: [
-      { role: "Graduate Analyst – Talent Advancement Program", level: "ML11", recruiter: "Cheryl-Ann Lim", email: "cheryl-ann.lim@accenture.com", linkedIn: "https://www.linkedin.com/in/cherylannliim/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Graduate-Technology-Analyst---Talent-Advancement-Program-2025_R00235221" },
-      { role: "Accenture Internship Program (May–Aug 2027)", level: "Internship", recruiter: "Whitney Woo", email: "whitney.woo@accenture.com", linkedIn: "https://www.linkedin.com/in/whitney-woo/", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Accenture-Internship-Program---May-to-Aug-2027_R00353592" },
+      { role: "Graduate Analyst – Talent Advancement Program", level: "ML11", email: "cheryl-ann.lim@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Graduate-Technology-Analyst---Talent-Advancement-Program-2025_R00235221" },
+      { role: "Accenture Internship Program (May–Aug 2027)", level: "Internship", email: "whitney.woo@accenture.com", adUrl: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Singapore/Accenture-Internship-Program---May-to-Aug-2027_R00353592" },
     ]
   }
 ];
@@ -184,57 +156,43 @@ const container = document.getElementById('mainContent');
 let qrIndex = 0;
 
 pillars.forEach(pillar => {
-  const totalRoles = pillar.roles.length;
-
   // Pillar header
   const ph = document.createElement('div');
   ph.className = 'pillar-header';
   ph.style.background = pillar.color;
-  ph.innerHTML = `${pillar.name}<span class="pillar-count">${totalRoles} role${totalRoles > 1 ? 's' : ''}</span>`;
+  ph.innerHTML = `<span>${pillar.name}</span><span class="pillar-count">${pillar.roles.length} role${pillar.roles.length > 1 ? 's' : ''}</span>`;
   container.appendChild(ph);
 
-  // Table
-  const table = document.createElement('table');
-  table.innerHTML = `
-    <colgroup>
-      <col style="width:45%">
-      <col style="width:20%">
-      <col style="width:35%">
-    </colgroup>
-    <thead>
-      <tr>
-        <th>Role</th>
-        <th style="text-align:center">View JD &amp; Apply</th>
-        <th>Recruiter Email</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  `;
-
-  const tbody = table.querySelector('tbody');
+  const wrap = document.createElement('div');
+  wrap.className = 'cards-wrap';
 
   pillar.roles.forEach(r => {
-    const liId = `qr-li-${qrIndex}`;
-    const adId = `qr-ad-${qrIndex}`;
-    qrIndex++;
-
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td class="role-name">${r.role}</td>
-      <td class="qr-cell"><div class="qr-wrapper"><div id="${adId}"></div><div class="qr-label">View JD &amp; Apply</div></div></td>
-      <td class="email-cell">${r.email}</td>
+    const adId = `qr-ad-${qrIndex++}`;
+    const card = document.createElement('div');
+    card.className = 'role-card';
+    card.innerHTML = `
+      <div class="card-info">
+        <div class="card-role">${r.role}</div>
+        <span class="card-level">${r.level}</span>
+        <div class="card-email">${r.email}</div>
+      </div>
+      <div class="card-qr">
+        <div id="${adId}"></div>
+        <div class="card-qr-label">Scan to apply</div>
+      </div>
     `;
-    tbody.appendChild(tr);
+    wrap.appendChild(card);
 
     requestAnimationFrame(() => {
       new QRCode(document.getElementById(adId), {
-        text: r.adUrl, width: 60, height: 60,
-        colorDark: "#A100FF", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M
+        text: r.adUrl, width: 80, height: 80,
+        colorDark: "#A100FF", colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.M
       });
     });
   });
 
-  container.appendChild(table);
+  container.appendChild(wrap);
 });
 </script>
 </body>
