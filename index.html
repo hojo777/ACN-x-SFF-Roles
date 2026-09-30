@@ -197,15 +197,13 @@ pillars.forEach(pillar => {
   const table = document.createElement('table');
   table.innerHTML = `
     <colgroup>
-      <col style="width:38%">
-      <col style="width:18%">
-      <col style="width:18%">
-      <col style="width:26%">
+      <col style="width:45%">
+      <col style="width:20%">
+      <col style="width:35%">
     </colgroup>
     <thead>
       <tr>
         <th>Role</th>
-        <th style="text-align:center">Recruiter LinkedIn</th>
         <th style="text-align:center">View JD &amp; Apply</th>
         <th>Recruiter Email</th>
       </tr>
@@ -223,17 +221,12 @@ pillars.forEach(pillar => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td class="role-name">${r.role}</td>
-      <td class="qr-cell"><div class="qr-wrapper"><div id="${liId}"></div><div class="qr-label">${r.recruiter}</div></div></td>
       <td class="qr-cell"><div class="qr-wrapper"><div id="${adId}"></div><div class="qr-label">View JD &amp; Apply</div></div></td>
       <td class="email-cell">${r.email}</td>
     `;
     tbody.appendChild(tr);
 
     requestAnimationFrame(() => {
-      new QRCode(document.getElementById(liId), {
-        text: r.linkedIn, width: 60, height: 60,
-        colorDark: "#1a1a1a", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M
-      });
       new QRCode(document.getElementById(adId), {
         text: r.adUrl, width: 60, height: 60,
         colorDark: "#A100FF", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M
