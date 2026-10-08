@@ -156,6 +156,48 @@ const regUrl = "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/event
 const container = document.getElementById('mainContent');
 let qrIndex = 0;
 
+// Registration + CV Upload section — shown first
+const regHeader = document.createElement('div');
+regHeader.className = 'pillar-header';
+regHeader.style.background = '#A100FF';
+regHeader.style.marginTop = '8px';
+regHeader.innerHTML = `<span>Registration &amp; CV Upload</span>`;
+container.appendChild(regHeader);
+
+const regWrap = document.createElement('div');
+regWrap.className = 'cards-wrap';
+
+const regId = `qr-reg`;
+const regCard = document.createElement('div');
+regCard.className = 'role-card';
+regCard.style.justifyContent = 'center';
+regCard.style.flexDirection = 'column';
+regCard.style.alignItems = 'center';
+regCard.style.gap = '12px';
+regCard.style.padding = '24px 16px';
+regCard.innerHTML = `
+  <div style="text-align:center; width:100%;">
+    <div class="card-role" style="font-size:15px; text-align:center;">Register for the Event &amp; Upload Your CV</div>
+    <div class="card-email" style="margin-top:8px;font-size:11px;color:#666; text-align:center;">Scan the QR code below to register and deposit your CV with Accenture</div>
+    <div style="display:flex; justify-content:center; margin-top:14px;">
+      <div>
+        <div id="${regId}"></div>
+        <div class="card-qr-label" style="font-size:10px;margin-top:6px;text-align:center;">Scan to register &amp; upload CV</div>
+      </div>
+    </div>
+  </div>
+`;
+regWrap.appendChild(regCard);
+container.appendChild(regWrap);
+
+requestAnimationFrame(() => {
+  new QRCode(document.getElementById(regId), {
+    text: regUrl, width: 140, height: 140,
+    colorDark: "#A100FF", colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+});
+
 pillars.forEach(pillar => {
   // Pillar header
   const ph = document.createElement('div');
@@ -196,46 +238,7 @@ pillars.forEach(pillar => {
   container.appendChild(wrap);
 });
 
-// Registration + CV Upload section
-const regHeader = document.createElement('div');
-regHeader.className = 'pillar-header';
-regHeader.style.background = '#A100FF';
-regHeader.innerHTML = `<span>Registration &amp; CV Upload</span>`;
-container.appendChild(regHeader);
 
-const regWrap = document.createElement('div');
-regWrap.className = 'cards-wrap';
-
-const regId = `qr-reg`;
-const regCard = document.createElement('div');
-regCard.className = 'role-card';
-regCard.style.justifyContent = 'center';
-regCard.style.flexDirection = 'column';
-regCard.style.alignItems = 'center';
-regCard.style.gap = '12px';
-regCard.style.padding = '24px 16px';
-regCard.innerHTML = `
-  <div style="text-align:center; width:100%;">
-    <div class="card-role" style="font-size:15px; text-align:center;">Register for the Event &amp; Upload Your CV</div>
-    <div class="card-email" style="margin-top:8px;font-size:11px;color:#666; text-align:center;">Scan the QR code below to register and deposit your CV with Accenture</div>
-    <div style="display:flex; justify-content:center; margin-top:14px;">
-      <div>
-        <div id="${regId}"></div>
-        <div class="card-qr-label" style="font-size:10px;margin-top:6px;text-align:center;">Scan to register &amp; upload CV</div>
-      </div>
-    </div>
-  </div>
-`;
-regWrap.appendChild(regCard);
-container.appendChild(regWrap);
-
-requestAnimationFrame(() => {
-  new QRCode(document.getElementById(regId), {
-    text: regUrl, width: 140, height: 140,
-    colorDark: "#A100FF", colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.M
-  });
-});
 </script>
 </body>
 </html>
